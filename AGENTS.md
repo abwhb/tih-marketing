@@ -2,43 +2,56 @@
 
 ## Project Structure & Module Organization
 
-This repository stores Meta advertising assets and campaign documentation; it does not contain application source code. Organize work under `creative-assets/<brand>/<month-year>/`. For the current The Inspire Home batch:
+This repository combines TIH marketing deliverables and internal tools.
 
-- `references/` contains source product and room photography.
-- `final/` contains lossless master PNG creatives.
-- `meta-upload/` contains delivery-ready JPEG exports.
-- `creative-manifest.md` records copy, claims, destinations, and intended funnel use.
-- `meta-launch-log.md` records published campaign and ad identifiers.
-- Dated `meta-performance-report-YYYY-MM-DD.md` files capture results and recommendations.
+- `creative-assets/<brand>/<month-year>/references/` stores source photography.
+- `final/` contains lossless PNG masters; `meta-upload/` contains delivery-ready JPEGs.
+- Keep manifests, launch logs, and dated reports beside each creative batch.
+- `apps/shopify-ops/` contains the Next.js/Vercel OAuth gateway and TypeScript MCP server. Routes live in `app/`, shared code in `src/`, and tests in `tests/`.
+- `apps/creative-studio/` contains grounded creative research and generation. Provider clients live in `src/providers/`, orchestration in `src/services/`, and tests in `tests/`.
+- `brand/the-inspire-home/` is the canonical brand and claims source.
 
-Keep each campaign batch self-contained. Do not overwrite source references when producing derivatives.
+Keep campaign batches self-contained and never overwrite source references.
 
 ## Build, Test, and Development Commands
 
-There is no dependency manifest or automated build system. Use lightweight checks from the repository root:
+Run application commands from `apps/shopify-ops/`:
 
 ```sh
-rg --files creative-assets                  # inventory tracked deliverables
-file creative-assets/the-inspire-home/aug-2026/final/*
-sips -g pixelWidth -g pixelHeight creative-assets/the-inspire-home/aug-2026/final/*.png
+pnpm install       # install dependencies
+pnpm test          # run tests
+pnpm typecheck     # check TypeScript
+pnpm build         # build MCP and web app
+pnpm dev:web       # run OAuth app locally
+pnpm sync-token    # sync the remote session locally
+pnpm start:mcp     # start the MCP server
 ```
 
-Run `git diff --check` before committing when this directory is placed under Git; it catches whitespace errors in Markdown.
+Run creative-system commands from `apps/creative-studio/`:
+
+```sh
+pnpm preflight                         # validate services and inputs
+pnpm evidence -- --product=<handle>    # prepare Shopify evidence
+pnpm test                              # run tests
+pnpm typecheck                         # check TypeScript
+```
+
+For creative QA, use `file final/*` and `sips -g pixelWidth -g pixelHeight final/*.png`. Run `git diff --check` before committing.
 
 ## Style & Naming Conventions
 
-Write Markdown in UTF-8 with sentence-case headings, short paragraphs, and compact tables. Use Australian spelling and `A$` for campaign currency. Name creative files with a zero-padded sequence and lowercase kebab case, for example `04-maleny-jute.png`. Keep the same sequence and stem across `final/`, `meta-upload/`, and the manifest. Date reports using ISO order: `meta-performance-report-2026-08-16.md`.
+Use strict TypeScript, ES modules, two-space indentation, explicit return types, and Zod at external boundaries. Use kebab-case files and camelCase functions. MCP tools follow `shopify_<action>_<resource>` and declare accurate safety annotations.
 
-Never invent prices, reviews, guarantees, product properties, or campaign outcomes. Preserve the photographed product’s design, colour, pile, and material appearance.
+Write Markdown in UTF-8 with sentence-case headings and Australian spelling. Creative names use zero-padded kebab case, for example `04-maleny-jute.png`; reports use ISO dates.
 
 ## Testing Guidelines
 
-Manually inspect every exported image for cropping, legibility, colour fidelity, and correct product representation. Confirm file type and dimensions with the commands above. Cross-check on-image copy, primary text, CTA, and destination against `creative-manifest.md`. Verify destination URLs return successfully before launch, and reconcile published IDs and budgets in `meta-launch-log.md`.
+Use `node:test` and `node:assert/strict`; name tests `*.test.ts`. Cover OAuth validation, token storage, GraphQL classification, pagination, and mutation safeguards. Production write tests require an explicit, reversible resource.
 
 ## Commit & Pull Request Guidelines
 
-Git history is unavailable in this checkout, so no existing convention can be inferred. Use concise, imperative commits such as `Add August Meta performance report` or `Refresh Maleny upload asset`. Pull requests should describe the campaign and funnel, list changed assets, note claim and URL verification, and include visual previews for creative changes. Link the relevant brief or issue when one exists.
+Use imperative commits such as `Add Shopify OAuth gateway`. Pull requests should describe impact and validation, link the brief or issue, and preview visual changes.
 
 ## Security & Configuration
 
-Do not commit access tokens, cookies, customer exports, or private audience data. Treat account, Pixel, and ad IDs as operational metadata and include them only where needed for campaign traceability.
+Never commit `.env`, `.env.local`, OAuth tokens, cookies, customer exports, or `.data/`. Keep Vercel secrets server-side and encrypt remote sessions at rest. Logs may include Shopify resource IDs and operation hashes, but never secrets, customer details, or mutation variable values.
