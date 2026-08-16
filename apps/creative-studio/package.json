@@ -1,0 +1,28 @@
+{
+  "name": "tih-creative-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Grounded creative research and production toolkit for The Inspire Home.",
+  "type": "module",
+  "scripts": {
+    "preflight": "tsx --env-file=../../.env src/cli.ts preflight",
+    "evidence": "tsx --env-file=../../.env src/cli.ts prepare",
+    "research": "tsx --env-file=../../.env src/cli.ts research",
+    "generate": "tsx --env-file=../../.env src/cli.ts generate",
+    "render": "tsx --env-file=../../.env src/cli.ts render",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

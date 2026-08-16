@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "brandName": "The Inspire Home",
+  "locale": "en-AU",
+  "website": "https://theinspirehome.com.au/",
+  "logoUrls": {
+    "primary": "https://theinspirehome.com.au/cdn/shop/files/logo_4_TIH.png?v=1776430666&width=600",
+    "structuredData": "https://theinspirehome.com.au/cdn/shop/files/Full_LOGO.png?v=1781696078&width=500",
+    "favicon": "https://theinspirehome.com.au/cdn/shop/files/Favicon_Inspire_Home.png?crop=center&height=32&v=1779456055&width=32"
+  },
+  "colours": {
+    "warmIvory": "#F9F6F2",
+    "ink": "#121212",
+    "white": "#FFFFFF",
+    "oliveTaupe": "#6E6855",
+    "sand": "#D8C8AD",
+    "terracotta": "#774538",
+    "deepNavy": "#27394C",
+    "mutedGold": "#AF8E57"
+  },
+  "typography": {
+    "heading": "TomatoGrotesk-ExtraLight",
+    "headingAlternative": "TomatoGrotesk-Light",
+    "body": "Segma-Regular",
+    "editorialAccent": "Juana-ExtraLight",
+    "editorialAccentAlternative": "Juana-Light",
+    "legacyFallbacks": ["Lora", "Tenor Sans"]
+  },
+  "voice": {
+    "traits": ["calm", "warm", "considered", "design-literate", "quietly confident", "helpful"],
+    "preferredTerms": ["considered", "grounded", "natural texture", "warmth", "character", "crafted", "quiet impact", "made for Australian living", "designed for real homes"],
+    "avoid": ["cheap", "must-have", "best ever", "fake urgency", "unverified luxury claims", "invented testimonials"]
+  },
+  "verifiedGlobalClaims": [
+    "Free standard shipping on all orders within Australia",
+    "Conditional change-of-mind returns within 30 days of delivery",
+    "NSW-based Australian rug brand",
+    "Style quiz, AR visualiser and styling support are available"
+  ],
+  "restrictedClaims": [
+    "100% sustainably sourced materials",
+    "Fair Trade certified craftsmanship",
+    "hand-knotted construction unless verified for the selected product",
+    "customer testimonials without a stored source"
+  ],
+  "creativeRules": [
+    "Preserve the real rug design, colour, pile, edge and material appearance",
+    "Use live Shopify data for product facts, price, inventory and availability",
+    "Cite a grounded source for every concept",
+    "Use approved offers only",
+    "Require human approval before Canva export or campaign publication"
+  ]
+}
