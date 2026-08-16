@@ -1,2 +1,11 @@
 .DS_Store
 Close
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+.next/
+*.tsbuildinfo
+.data/
+.shopify/
